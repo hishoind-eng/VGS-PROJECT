@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="language" content="English" />
+    <meta name="author" content="Visual Green" />
+    <meta name="publisher" content="Visual Green" />
+    <meta name="distribution" content="global" />
+
+    <!-- Title & Canonical -->
+    <title> Visual Green | Premium Men's Salon & Beauty Parlour </title>
+    <link rel="canonical" href="https://visualgreen.com/" />
+
+    <!-- Description & Keywords -->
+    <meta name="description" content="Visual Green is a premium Men's Salon & Beauty Parlour offering expert haircuts, beard grooming, spa treatments and luxury styling in an elegant black, gold and green ambience." />
+    <meta name="keywords" content="men's salon, men's beauty parlour, barbershop, haircut, beard grooming, hair spa, grooming lounge, luxury salon, Visual Green, men's spa, hair styling" />
+    <meta name="copyright" content="Visual Green" />
+
+    <!-- CSS Preload -->
+    <link rel="stylesheet" href="assets/css/visual.css">
+
+
+    <link rel="icon" href="assets/img/common-img/comapny-logo.png" type="image/png">
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        .gallery-container {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery-img {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 350px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            border-radius: 15px;
+            border: 2px solid goldenrod;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        }
+
+        .gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .gallery-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-img:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .gallery-img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-img {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Start Header Top Area -->
+    <div class="header-top px-3 px-md-5 pt-2 pb-1" id="top">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <!-- Left Content -->
+                <div class="contact-info d-flex align-items-center flex-wrap">
+                    <a href="#">
+                        <i class="fa-solid fa-map-pin"></i>
+                        Visit Us: Anna Salai, Thanjavur
+                    </a>
+                    <a href="tel:+919876543210">
+                        <i class="fas fa-phone"></i>
+                        Call Us: +91 98765 43210
+                    </a>
+                    <a href="mailto:info@visualgreen.com">
+                        <i class="fas fa-envelope"></i>
+                        Mail Us: info@visualgreen.com
+                    </a>
+                </div>
+
+                <!-- Right Side Icon -->
+                <div class="dubai-icon ">
+                    <img src="assets/img/common/design-img1.png" alt="Visual Green Salon">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Start NavBar Area -->
+    <nav id="Navbar" class="navbar px-3 px-md-5 py-1 py-md-2" style="min-height:64px;">
+
+        <div class="website-name">
+            <div class="logo-img">
+                <img src="assets/img/common/logo-bg.png" alt="Visual Green logo">
+            </div>
+
+            <div class="logo-text pt-0 pt-md-1">
+                <h1> Visual Green </h1>
+                <h2 class="pt-1 ps-1"> Men's Salon &amp; Beauty Parlour </h2>
+            </div>
+        </div>
+
+        <div class="navbar-item">
+            <div class="navbar-menu pe-5 pt-3">
+                <ul class="navbar-menu-links text-white">
+
+                    <a href="index.html">
+                        <li>Home</li>
+                    </a>
+                    <a href="about.html">
+                        <li>About</li>
+                    </a>
+                    <a href="services.html">
+                        <li>Services</li>
+                    </a>
+                    <a href="gallery.html">
+                        <li>Gallery</li>
+                    </a>
+                    <a href="booking.html">
+                        <li>Booking</li>
+                    </a>
+                    <a href="contact.html">
+                        <li>Contact</li>
+                    </a>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="navbar-right d-flex align-items-center gap-3">
+            <a href="login.php" class="login-btn" aria-label="Login">
+                <span class="login-btn-ring"></span>
+                <i class="bi bi-person-fill"></i>
+            </a>
+
+            <a href="contact.php#contact" class="media-service pe-2">
+                <i class="fas fa-calendar-check media-service-icon"></i>
+            </a>
+
+            <div class="navbar-menu-toggle ps-1" id="navbarMenuToggle" role="button" tabindex="0"
+                aria-label="Open menu" aria-expanded="false" aria-controls="sideNavbar">
+                <i class="bi bi-list"></i>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Start Side Navbar Area -->
+    <aside class="side-navbar" id="sideNavbar">
+        <div class="side-navbar-title">
+            <div></div>
+            <p class="cross-symbol" id="closeSideNavbar" role="button" tabindex="0" aria-label="Close menu">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </p>
+        </div>
+
+        <div class="side-navbar-logo">
+            <img src="assets/img/common/side-bar-img.png" alt="Visual Green full logo">
+        </div>
+
+        <div class="side-navbar-links">
+            <p class="side-navbar-link"><a href="index.html"> Home </a></p>
+            <p class="side-navbar-link"><a href="about.html"> About </a></p>
+            <p class="side-navbar-link"><a href="services.html"> Services </a></p>
+            <p class="side-navbar-link"><a href="gallery.html"> Gallery </a></p>
+            <p class="side-navbar-link"><a href="booking.html"> Booking </a></p>
+            <p class="side-navbar-link"><a href="contact.html"> Contact </a></p>
+        </div>
+
+        <div class="side-navbar-bottom-img">
+            <img src="assets/img/common/design-img2.png" alt="Visual Green" class="mb-4">
+        </div>
+    </aside>
+
+    <!-- Backdrop/overlay behind the side navbar -->
+    <div class="side-navbar-overlay" id="sideNavbarOverlay"></div>
+    <!-- ─── Gallery Header ─── -->
+    <section class="saloon-page-header" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(assets/img/gallery/gallery-header.jpeg);">
+        <div class="saloon-page-header-content">
+            <h4>OUR GALLERY</h4>
+            <h1>Explore Our Grooming, Styling & Salon Experience</h1>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="gallery-container py-5">
+            <div class="container">
+
+                <div class="section-head pb-5 text-center" data-aos="fade-up">
+                    <p class="home_section_eyebrow" style="color: #da9a33">the visual green edge</p>
+                    <h2 class="home_section_title text-white">Why Gentlemen <em>Choose</em> Us</h2>
+                    <p class="home_section_sub text-white">Six reasons our chairs stay full and our clients keep coming back.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-hair-cut.jpg" alt="hair cut">
+                            <div class="overlay"> Precision Haircut — Barber creating a clean modern fade.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-beard-grooming.jpeg" alt="beard grooming">
+                            <div class="overlay">Beard Grooming — Detailed beard shaping with professional tools.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallery-hair-colour-men-100kb.jpeg" alt="Food 2">
+                            <div class="overlay">World Of Colors — Premium men’s hair coloring with rich, natural tones and a clean modern finish. </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-interior.jpg" alt="Food 4">
+                            <div class="overlay">Premium Salon Interior — Luxury black chair, mirror, green ambient lighting.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-hair-style.jpeg" alt="Food 3">
+                            <div class="overlay">Hair Styling — Professional styling with blow dryer and brush.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-clasic-shave.jpg" alt="Food 4">
+                            <div class="overlay"> Classic Shave — Traditional hot towel shave experience.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-hair-wash.jpg" alt="Food 1">
+                            <div class="overlay">Hair Wash Experience — Relaxing shampoo and hair treatment.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-grooming-products.jpg" alt="Food 2">
+                            <div class="overlay">Grooming Tools — Clippers, scissors, combs and premium barber tools arranged neatly.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-wrk-exp.jpg" alt="Food 3">
+                            <div class="overlay">Barber at Work — Close-up of skilled hands during precision cutting.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-luxury.jpg" alt="Food 4">
+                            <div class="overlay">Luxury Details — Salon mirror, leather chair, towels and grooming products.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-hair-tex.webp" alt="Food 1">
+                            <div class="overlay">Hair Texture Detail — Close-up of a finished fade or textured hairstyle.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="gallery-img">
+                            <img src="assets/img/gallery/gallary-relaxation.jpeg" alt="Food 2">
+                            <div class="overlay">Relaxation Moment — Client enjoying a premium grooming treatment.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ HELP / CONTACT SECTION ============ -->
+        <section class="home_contact_section py-5 px-2" id="contact">
+            <div class="container">
+                <div class="section-head pb-5 text-center" data-aos="fade-up">
+                    <p class="home_section_eyebrow">get in touch</p>
+                    <h2 class="home_section_title">Need a help? <em>Let's talk.</em></h2>
+                    <p class="home_section_sub pb-4">Schedule a meeting for discussion</p>
+                    <p class="home_section_sub">Have a question about our services, pricing or booking a slot? Our
+                        team is just a call or click away and typically responds within a few hours. Reach out and
+                        we'll help you find the right treatment for your needs.</p>
+
+                    <div class="home_header_hero-btns justify-content-center mt-4" data-aos="fade-up" data-aos-delay="200">
+
+                        <a href="booking.html" class="home_header_btn-hero-primary salon-cut-btn">
+                            <span class="btn-text">Click Here</span>
+                            <span class="scissor-line"></span>
+                            <span class="cut-spark">✂</span>
+                        </a>
+
+                        <a href="contact.html" class="home_header_btn-hero-outline salon-cut-btn">
+                            <span class="btn-text" style="color: #694f01;">Call Us Now</span>
+                            <span class="scissor-line"></span>
+                            <span class="cut-spark">✂</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer px-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-logo"> Visual Green Studio </h3>
+                    <p class="footer-description">
+                        Welcome to our salon and beauty parlour, where expert styling, premium beauty treatments, and personalized care come together to help you look and feel your best.
+                    </p>
+
+                    <div class="share-certificate">
+                        <a href="#"> <i class="fa-brands fa-instagram" id="instagram"></i> </a>
+                        <a href="#"> <i class="fa-brands fa-facebook-f" id="facebook"></i> </a>
+                        <a href="#"> <i class="fa-regular fa-envelope" id="gmail"></i> </a>
+                        <a href="#"> <i class="fa-brands fa-whatsapp" id="whatsapp"></i> </a>
+                        <a href="#"> <i class="fab fa-youtube" id="youtube"></i> </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Service</a>
+                    <a href="#" class="footer-link">Booking</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <p style="color: var(--secondary-gold); margin-bottom: 0.5rem;">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #bd8833"></i>
+                        1234, Main Street, Your City, 123456.
+                    </p>
+                    <p style="color: var(--secondary-gold); margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone" style="margin-right: 10px; color: #bd8833"></i>
+                        +91 12345 67890
+                    </p>
+                    <p style="color: var(--secondary-gold); margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone" style="margin-right: 10px; color: #bd8833"></i>
+                        +91 98765 43210
+                    </p>
+                    <p style="color: var(--secondary-gold); margin-bottom: 0.5rem;">
+                        <i class="fas fa-envelope" style="margin-right: 10px; color: #bd8833"></i>
+                        info@visualgreen.com
+                    </p>
+                    <p style="color: var(--secondary-gold);">
+                        <i class="fas fa-clock" style="margin-right: 10px; color: #bd8833"></i>
+                        Open Daily 09:00 AM - 09:00 PM
+                    </p>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h4 class="footer-title">Newsletter</h4>
+
+                    <p style="color: var(--secondary-gold); margin-bottom: 1rem;">
+                        Subscribe to receive the latest beauty tips, special offers, seasonal promotions, and exclusive salon updates.
+                    </p>
+
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom py-3">
+                <p class="bottom-content px-md-5 mt-2"> Copyright <span style="color: gold;"><i class="fa-solid fa-copyright"></i></span> 2026 <a href="#" style="color: var(--primary-gold); text-decoration: none;"> Visual Green Studio </a>. All rights reserved. Developed by <a href="https://www.hiskan.com/" style="text-decoration: none; font-weight: 900"> Hisho & <span style="color: blueviolet;"> Kanri </span> </a> </p>
+
+                <!-- Back to Top Button 
+            <a href="#top"> <button class="back-to-top"> ↑ </button> </a> -->
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"> </script>
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init();
+
+            /*======================================
+                SideBar Area JS
+            =======================================*/
+
+            var sidenavbar = document.getElementById("sideNavbar");
+            var sidenavbarOverlay = document.getElementById("sideNavbarOverlay");
+            var toggleBtn = document.getElementById("navbarMenuToggle");
+            var closeBtn = document.getElementById("closeSideNavbar");
+
+            if (!sidenavbar || !sidenavbarOverlay || !toggleBtn || !closeBtn) {
+                return;
+            }
+
+            function shownavbar() {
+                sidenavbar.classList.add("active");
+                sidenavbarOverlay.classList.add("active");
+                document.body.classList.add("no-scroll");
+                toggleBtn.setAttribute("aria-expanded", "true");
+            }
+
+            function closenavbar() {
+                sidenavbar.classList.remove("active");
+                sidenavbarOverlay.classList.remove("active");
+                document.body.classList.remove("no-scroll");
+                toggleBtn.setAttribute("aria-expanded", "false");
+            }
+
+            // Toggle button (hamburger) - open sidebar
+            toggleBtn.addEventListener("click", shownavbar);
+            toggleBtn.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    shownavbar();
+                }
+            });
+
+            // Close (x) button
+            closeBtn.addEventListener("click", closenavbar);
+            closeBtn.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    closenavbar();
+                }
+            });
+
+            // Clicking the overlay/backdrop closes the sidebar
+            sidenavbarOverlay.addEventListener("click", closenavbar);
+
+            // Close when a nav link inside the sidebar is tapped (mobile UX)
+            sidenavbar.querySelectorAll(".side-navbar-link a").forEach(function(link) {
+                link.addEventListener("click", closenavbar);
+            });
+
+            // Close on Escape key for accessibility
+            document.addEventListener("keydown", function(e) {
+                if (e.key === "Escape") {
+                    closenavbar();
+                }
+            });
+
+            // Keep the sidebar/overlay state correct if the viewport is resized
+            // past the breakpoint where the toggle button is hidden
+            window.addEventListener("resize", function() {
+                if (window.innerWidth > 1158) {
+                    closenavbar();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
