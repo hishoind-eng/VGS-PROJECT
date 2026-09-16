@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login · Verdant Salon</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --green-pale: #eaf7ef;
+            --green-light: #b9e6c9;
+            --green-mid: #4fa87a;
+            --green-deep: #276b4d;
+            --green-deeper: #143d2b;
+            --ink: #15321f;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --gold: #e9cf94;
+            --gold-deep: #b9903f;
+            --steel: #eef2f0;
+            --steel-deep: #8fa39a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            color: var(--ink);
+            background: linear-gradient(115deg,
+                    var(--green-pale) 0%,
+                    var(--green-light) 28%,
+                    var(--green-mid) 58%,
+                    var(--green-deep) 82%,
+                    var(--green-deeper) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        /* floating ambient dots */
+        .bg-sparkle {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            pointer-events: none;
+            animation: drift 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: .5;
+            }
+
+            50% {
+                transform: translateY(-14px) scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        /* ---------- Glass bubbles rising from bottom to top ---------- */
+        .bubble {
+            position: fixed;
+            bottom: -10vh;
+            left: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 28%,
+                    rgba(255, 255, 255, 0.32) 0%,
+                    rgba(255, 255, 255, 0.08) 55%,
+                    rgba(255, 255, 255, 0.16) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            pointer-events: none;
+            opacity: 0;
+            will-change: transform, opacity;
+            animation-name: bubbleRise;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            z-index: 0;
+        }
+
+        @keyframes bubbleRise {
+            0% {
+                transform: translate(0, 0) scale(0.85);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translate(var(--drift, 12px), -55vh) scale(1);
+            }
+
+            88% {
+                opacity: 0.28;
+            }
+
+            100% {
+                transform: translate(calc(var(--drift, 12px) * -1), -112vh) scale(1.05);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- Click ripple effect ---------- */
+        .click-ripple {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            margin-left: -6px;
+            margin-top: -6px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(79, 168, 122, 0.45) 55%,
+                    rgba(79, 168, 122, 0) 75%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: scale(0);
+            animation: clickPulse 0.6s ease-out forwards;
+        }
+
+        @keyframes clickPulse {
+            0% {
+                transform: scale(0);
+                opacity: 0.85;
+            }
+
+            60% {
+                opacity: 0.45;
+            }
+
+            100% {
+                transform: scale(6);
+                opacity: 0;
+            }
+        }
+
+        /* ---------- Back button ---------- */
+        .back-btn {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 40;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.55rem 1.15rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.24);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--ink);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(20, 61, 43, 0.18);
+            transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .back-btn svg {
+            transition: transform 0.18s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.36);
+            box-shadow: 0 10px 24px rgba(20, 61, 43, 0.24);
+            color: var(--ink);
+        }
+
+        .back-btn:hover svg {
+            transform: translateX(-2px);
+        }
+
+        .back-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ---------- Page reveal: falls smoothly from top to bottom ---------- */
+        .stage {
+            position: relative;
+            width: 100%;
+            max-width: 1120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .reveal-piece {
+            --fall-from: -150px;
+            opacity: 0;
+            transform: translateY(var(--fall-from));
+            animation: fallReveal 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes fallReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(var(--fall-from));
+            }
+
+            55% {
+                opacity: 1;
+            }
+
+            80% {
+                transform: translateY(6px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------- Illustration panel ---------- */
+        .illustration-card {
+            position: relative;
+            background: linear-gradient(160deg, #0f3a26 0%, #1c5c3f 55%, #2d7a52 100%);
+            border-radius: 34px;
+            box-shadow: 0 30px 60px rgba(10, 40, 26, 0.4);
+            width: 420px;
+            height: 480px;
+            flex-shrink: 0;
+            z-index: 2;
+            overflow: visible;
+            --fall-from: -170px;
+            animation-delay: 0.08s;
+        }
+
+        .illustration-scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        .salon-image-wrap {
+            position: relative;
+            width: 68%;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .salon-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            filter: drop-shadow(0 18px 22px rgba(10, 30, 20, 0.35));
+            animation: spinSlow 14s linear infinite;
+            will-change: transform;
+        }
+
+        .salon-image-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 38%;
+            height: 38%;
+            object-fit: contain;
+            border-radius: 50%;
+            /* stays fixed while .salon-image rotates around it */
+        }
+
+        @keyframes spinSlow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ---------- Glass login panel ---------- */
+        .glass-panel {
+            position: relative;
+            margin-left: -72px;
+            z-index: 1;
+            width: 520px;
+            min-height: 520px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 25px 70px rgba(15, 45, 30, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            padding: 3rem 3.4rem 2.6rem 5.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            --fall-from: -130px;
+            animation-delay: 0.28s;
+        }
+
+        .back-btn.reveal-piece {
+            --fall-from: -60px;
+            animation-duration: 0.75s;
+            animation-delay: 0s;
+        }
+
+        .brand-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 2rem !important;
+            letter-spacing: 0.5px;
+            margin-bottom: 2.1rem;
+            background: linear-gradient(90deg, var(--green-deeper), var(--green-deep) 55%, var(--green-mid));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .field-group {
+            margin-bottom: 1.9rem;
+        }
+
+        .field-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .field-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            border-bottom: 1.5px solid rgba(21, 50, 31, 0.5);
+            padding-bottom: 0.4rem;
+        }
+
+        .field-row input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-size: 1rem;
+            color: var(--ink);
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .field-row input::placeholder {
+            color: rgba(21, 50, 31, 0.35);
+        }
+
+        .field-row .icon-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--ink);
+            opacity: 0.75;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .field-row .icon-btn:hover {
+            opacity: 1;
+        }
+
+        .field-row.invalid {
+            border-bottom-color: #b3261e;
+        }
+
+        .error-text {
+            color: #9c2b1f;
+            font-size: 0.78rem;
+            margin-top: 0.3rem;
+            min-height: 1rem;
+            font-weight: 600;
+        }
+
+        .login-btn {
+            margin-top: 0.6rem;
+            width: 100%;
+            border: none;
+            border-radius: 50px;
+            padding: 0.85rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #fff;
+            letter-spacing: 0.3px;
+            background: linear-gradient(90deg, var(--green-deeper), var(--green-deep) 55%, var(--green-mid));
+            box-shadow: 0 14px 28px rgba(15, 45, 30, 0.35);
+            transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(15, 45, 30, 0.45);
+            filter: brightness(1.06);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--green-deeper);
+            color: #fff;
+            padding: 0.75rem 1.4rem;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+            z-index: 50;
+        }
+
+        .toast-msg.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ---------- Large desktop ---------- */
+        @media (min-width:1400px) {
+            .illustration-card {
+                width: 460px;
+                height: 520px;
+            }
+
+            .glass-panel {
+                width: 560px;
+                min-height: 560px;
+                padding: 3.4rem 3.6rem 3rem 6rem;
+            }
+
+            .brand-title {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* ---------- Tablet ---------- */
+        @media (max-width:991px) {
+            .stage {
+                max-width: 680px;
+            }
+
+            .illustration-card {
+                width: 340px;
+                height: 400px;
+            }
+
+            .glass-panel {
+                width: 420px;
+                min-height: 440px;
+                margin-left: -56px;
+                padding: 2.6rem 2.4rem 2.2rem 4.4rem;
+            }
+
+            .brand-title {
+                font-size: 2.1rem;
+                margin-bottom: 1.7rem;
+            }
+
+            .field-group {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* ---------- Mobile landscape / small tablet ---------- */
+        @media (max-width:767px) {
+            body {
+                padding: 1.2rem;
+                align-items: flex-start;
+                padding-top: 3rem;
+            }
+
+            .stage {
+                flex-direction: column;
+                max-width: 420px;
+            }
+
+            .illustration-card {
+                width: 100%;
+                max-width: 320px;
+                height: 220px;
+                margin-bottom: -64px;
+                z-index: 2;
+            }
+
+            .salon-image-wrap {
+                width: 62%;
+            }
+
+            .glass-panel {
+                width: 100%;
+                margin-left: 0;
+                padding: 4.4rem 2rem 2.2rem 2rem;
+                border-radius: 24px;
+                min-height: auto;
+            }
+
+            .brand-title {
+                text-align: center;
+                font-size: 2rem;
+            }
+
+            .back-btn {
+                top: 14px;
+                right: 14px;
+                padding: 0.5rem 0.95rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ---------- Small mobile ---------- */
+        @media (max-width:420px) {
+            .illustration-card {
+                height: 190px;
+                max-width: 250px;
+            }
+
+            .glass-panel {
+                padding: 4rem 1.4rem 1.8rem 1.4rem;
+            }
+
+            .brand-title {
+                font-size: 1.7rem;
+            }
+
+            .field-label {
+                font-size: 0.92rem;
+            }
+
+            .login-btn {
+                font-size: 0.98rem;
+                padding: 0.78rem 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .bg-sparkle,
+            .bubble,
+            .salon-image {
+                animation: none !important;
+            }
+
+            .bg-sparkle,
+            .bubble {
+                opacity: 0;
+            }
+
+            .stage,
+            .reveal-piece {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .login-btn,
+            .back-btn,
+            .back-btn svg {
+                transition: none;
+            }
+
+            .click-ripple {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Back button -->
+    <button type="button" class="back-btn reveal-piece" id="backBtn" aria-label="Go back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5" />
+            <path d="M12 19l-7-7 7-7" />
+        </svg>
+        Back
+    </button>
+
+    <div class="stage">
+
+        <!-- Illustration Card -->
+        <div class="illustration-card reveal-piece">
+            <div class="illustration-scene">
+                <div class="salon-image-wrap">
+                    <img class="salon-image" src="assets/img/common/rotated-logo.png" alt="Salon illustration">
+                    <img class="salon-image-center" src="assets/img/common/logo-bg.png" alt="Center logo">
+                </div>
+            </div>
+        </div>
+
+        <!-- Glass Login Panel -->
+        <div class="glass-panel reveal-piece mt-4 mt-md-0">
+            <h1 class="brand-title">Admin Login</h1>
+
+            <form id="loginForm" novalidate>
+                <div class="field-group">
+                    <label class="field-label" for="email">Email</label>
+                    <div class="field-row" id="emailRow">
+                        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+                        <span class="icon-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <rect x="3" y="5" width="18" height="14" rx="2" />
+                                <path d="M3 7l9 6 9-6" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="error-text" id="emailError"></div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label" for="password">Password</label>
+                    <div class="field-row" id="passwordRow">
+                        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+                        <button type="button" class="icon-btn" id="togglePassword" aria-label="Show password">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" id="eyeIcon">
+                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="error-text" id="passwordError"></div>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">Login</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="toast-msg" id="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Ambient floating sparkles across the background
+        (function() {
+            if (prefersReducedMotion) return;
+            const count = window.innerWidth < 767 ? 6 : 12;
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'bg-sparkle';
+                const size = Math.random() * 4 + 2;
+                dot.style.width = size + 'px';
+                dot.style.height = size + 'px';
+                dot.style.left = Math.random() * 100 + 'vw';
+                dot.style.top = Math.random() * 100 + 'vh';
+                dot.style.animationDelay = (Math.random() * 4) + 's';
+                dot.style.animationDuration = (4 + Math.random() * 4) + 's';
+                document.body.appendChild(dot);
+            }
+        })();
+
+        // Subtle glass bubbles rising from bottom to top, continuously
+        (function() {
+            if (prefersReducedMotion) return;
+            const count = window.innerWidth < 767 ? 8 : 14;
+            for (let i = 0; i < count; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 34 + 14; // 14px - 48px
+                const duration = Math.random() * 12 + 12; // 12s - 24s
+                const delay = Math.random() * -duration; // start mid-cycle for continuous feel
+                const drift = (Math.random() * 60 - 30) + 'px';
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.setProperty('--drift', drift);
+                bubble.style.animationDuration = duration + 's';
+                bubble.style.animationDelay = delay + 's';
+                document.body.appendChild(bubble);
+            }
+        })();
+
+        // Cursor click ripple effect
+        (function() {
+            if (prefersReducedMotion) return;
+            document.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.className = 'click-ripple';
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+                document.body.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+                setTimeout(() => ripple.remove(), 800);
+            });
+        })();
+
+        // Back button
+        document.getElementById('backBtn').addEventListener('click', function() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '#';
+            }
+        });
+
+        // Password visibility toggle
+        const pwInput = document.getElementById('password');
+        const toggleBtn = document.getElementById('togglePassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = pwInput.type === 'password';
+            pwInput.type = isHidden ? 'text' : 'password';
+            toggleBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+            eyeIcon.innerHTML = isHidden ?
+                '<path d="M3 3l18 18" stroke-linecap="round"/><path d="M10.6 10.6a3 3 0 004.2 4.2"/><path d="M9.9 5.1A10.9 10.9 0 0112 5c6.5 0 10 7 10 7a17.7 17.7 0 01-3.2 4.1M6.6 6.6C4 8.3 2 12 2 12s3.5 7 10 7a10 10 0 004.2-.9"/>' :
+                '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>';
+        });
+
+        // Simple validation + fake submit
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const emailRow = document.getElementById('emailRow');
+        const emailError = document.getElementById('emailError');
+        const passwordRow = document.getElementById('passwordRow');
+        const passwordError = document.getElementById('passwordError');
+        const loginBtn = document.getElementById('loginBtn');
+        const toast = document.getElementById('toast');
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2400);
+        }
+
+        function validEmail(v) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+
+            if (!validEmail(emailInput.value.trim())) {
+                emailRow.classList.add('invalid');
+                emailError.textContent = 'Enter a valid email address';
+                valid = false;
+            } else {
+                emailRow.classList.remove('invalid');
+                emailError.textContent = '';
+            }
+
+            if (pwInput.value.length < 6) {
+                passwordRow.classList.add('invalid');
+                passwordError.textContent = 'Password must be at least 6 characters';
+                valid = false;
+            } else {
+                passwordRow.classList.remove('invalid');
+                passwordError.textContent = '';
+            }
+
+            if (!valid) return;
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Logging in...';
+
+            setTimeout(() => {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Login';
+                showToast('Welcome back! Login successful.');
+            }, 1100);
+        });
+    </script>
+
+</body>
+
+</html>
